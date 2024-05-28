@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class EmployeesCard extends StatelessWidget {
   String name;
   int age;

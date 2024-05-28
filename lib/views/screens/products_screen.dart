@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lesson44_homework/controllers/products_controller.dart';
+import 'package:lesson44_homework/models/product_model.dart';
+import 'package:lesson44_homework/views/widgets/edit_showdialog.dart';
 import 'package:lesson44_homework/views/widgets/product_add_dialogbox.dart';
 import 'package:lesson44_homework/views/widgets/products_card.dart';
 
@@ -22,7 +24,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     // TODO: implement initState
     super.initState();
     productsController.getProducts();
-    setState(() {});
   }
 
   void onSave() {
@@ -72,13 +73,31 @@ class _ProductsScreenState extends State<ProductsScreen> {
         padding: const EdgeInsets.all(30.0),
         child: GridView.builder(
           itemCount: productsController.products.length,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemBuilder: (context, index) {
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
+          itemBuilder: (context, i) {
             return ProductsCard(
-              name: productsController.products[index].name,
-              price: productsController.products[index].price,
-              inStock: productsController.products[index].inStock,
+              name: productsController.products[i].name,
+              price: productsController.products[i].price,
+              inStock: productsController.products[i].inStock,
+              editButton: () async {
+                Product? editedProduct = await showDialog(
+                  context: context,
+                  builder: (context) => EditDialogBox(
+                    product: productsController.products[i],
+                  ),
+                );
+                if (editedProduct != null) {
+                  productsController.editProduct(i, editedProduct.name,
+                      editedProduct.price, editedProduct.inStock);
+                }
+                setState(() {});
+              },
+              deleteButton: () {
+                setState(() {
+                  productsController.deleteProduct(i);
+                });
+              },
             );
           },
         ),

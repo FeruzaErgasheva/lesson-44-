@@ -1,8 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:lesson44_homework/controllers/products_controller.dart';
 
+// ignore: must_be_immutable
 class ProductDialogBox extends StatefulWidget {
   Function()? onSave;
   TextEditingController productNameController ;
@@ -51,23 +51,23 @@ class _ProductDialogBoxState extends State<ProductDialogBox> {
               children: [
                 TextButton(
                     style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                       backgroundColor:
-                          const MaterialStatePropertyAll(Colors.deepPurple),
+                          const WidgetStatePropertyAll(Colors.deepPurple),
                       foregroundColor:
-                          const MaterialStatePropertyAll(Colors.white),
+                          const WidgetStatePropertyAll(Colors.white),
                     ),
                     onPressed: widget.onSave,
                     child: const Text("Save")),
                 TextButton(
                     style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
                       backgroundColor:
-                          const MaterialStatePropertyAll(Colors.deepPurple),
+                          const WidgetStatePropertyAll(Colors.deepPurple),
                       foregroundColor:
-                          const MaterialStatePropertyAll(Colors.white),
+                          const WidgetStatePropertyAll(Colors.white),
                     ),
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text("Cancel"))
